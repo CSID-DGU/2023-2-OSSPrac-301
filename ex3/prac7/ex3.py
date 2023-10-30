@@ -13,7 +13,7 @@ def result():
         result['Name']=request.form.get('name')
         result['Student Number']=request.form.get('StudentNumber')
         result['gender_check']=request.form.get('gender_check')
-        result['Major']=request.form.get('major')
+        result['Major']=request.form.get('Major')   
         result['programming_language']=", ".join(request.form.getlist('programming_language'))
 
         return render_template('result.html',result=result)
