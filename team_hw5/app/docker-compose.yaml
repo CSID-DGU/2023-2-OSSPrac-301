@@ -1,0 +1,8 @@
+version : "3.0"
+
+sevices:
+  web:
+    build: .
+    image: nayoung601/team301:3.0
+    ports:
+      - 80:80
