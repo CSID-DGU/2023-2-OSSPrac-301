@@ -3,6 +3,5 @@ version: '3'
 services:
   app:
     build: .
-    image: john3176/osspracdockercompose:3.0
     ports:
       - "5001:5001"
