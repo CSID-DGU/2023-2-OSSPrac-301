@@ -1,0 +1,38 @@
+pipeline{
+    agent any
+    
+    environment{
+        DOCKER = credentials('docker-hub')
+    }
+    
+    stages{
+        stage('Prepare') {
+            steps {
+                git url: 'https://github.com/CSID-DGU/2023-2-OSSPrac-301.git',
+                    credentialsId: 'github',
+                    branch: 'main'
+            }
+        }
+        
+        stage('Build'){
+            steps{
+                sh 'docker-compose build app'
+            }
+        }
+        
+        stage('Tag'){
+            steps{
+                sh "docker tag git-app ${DOCKER_USR}/301:${BUILD_NUMBER}"
+            }
+        }
+        
+        stage('Push'){
+            steps{
+                script{
+                    sh "docker login -u ${DOCKER_USR} -p ${DOCKER_PSW}"
+                    sh "docker push ${DOCKER_USR}/301:${BUILD_NUMBER}"
+                }
+            }
+        }
+    }
+}
